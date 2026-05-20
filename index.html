@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>peach's patiesserie</title>
+    <link rel="shortcut icon" href="logo.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/tooplate-antique-cafe.css">
+
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 800;
+        }
+
+        .tm-text-green { color: #c0392b !important; }
+        .tm-bg-green { background-color: #c0392b !important; }
+        .tm-bg-green:hover { background-color: #96281b !important; }
+
+        .menu-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.375rem;
+            flex-shrink: 0;
+        }
+
+        .cat-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .cat-modal-overlay.active { display: flex; }
+        .cat-modal-box {
+            background: #3b2a1a;
+            border-radius: 1rem;
+            max-width: 750px;
+            width: 90%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        @media (min-width: 640px) { .cat-modal-box { flex-direction: row; } }
+        .cat-modal-img {
+            width: 100%;
+            max-width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            flex-shrink: 0;
+            margin: 0 auto;
+        }
+        @media (min-width: 640px) { .cat-modal-img { width: 220px; margin: 0; } }
+        .cat-modal-info { flex: 1; color: white; }
+        .cat-modal-info h3 { font-size: 1.75rem; margin-bottom: 0.5rem; color: #f0c040; }
+        .cat-modal-info .cat-detail { font-size: 1rem; margin-bottom: 0.25rem; color: #d4c5a9; }
+        .cat-modal-info .cat-bio {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #e8e0d0;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+        }
+        .cat-modal-close {
+            position: absolute;
+            top: 0.75rem; right: 1rem;
+            font-size: 1.75rem;
+            color: white; cursor: pointer;
+            background: none; border: none; line-height: 1;
+        }
+        .cat-modal-close:hover { color: #f0c040; }
+        .btn-know-more {
+            margin-top: 0.75rem;
+            background: transparent;
+            border: 1.5px solid #f0c040;
+            color: #f0c040;
+            padding: 0.35rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+        .btn-know-more:hover { background: #f0c040; color: #3b2a1a; }
+    </style>
+</head>
+<body>    
+
+    <!-- INTRO / COVER -->
+<div id="intro" style="background-image: url('background6.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <nav id="tm-nav" class="fixed w-full">
+            <div class="tm-container mx-auto px-2 md:py-6 text-right">
+                <button class="md:hidden py-2 px-2" id="menu-toggle"><i class="fas fa-2x fa-bars tm-text-gold"></i></button>
+                <ul class="mb-3 md:mb-0 text-2xl font-normal flex justify-end flex-col md:flex-row">
+                    <li class="inline-block mb-4 mx-4"><a href="#intro" class="tm-text-gold py-1 md:py-3 px-4">Home</a></li>
+                    <li class="inline-block mb-4 mx-4"><a href="#menu" class="tm-text-gold py-1 md:py-3 px-4">Menu</a></li>
+                    <li class="inline-block mb-4 mx-4"><a href="#about" class="tm-text-gold py-1 md:py-3 px-4">About</a></li>
+                    <li class="inline-block mb-4 mx-4"><a href="#contact" class="tm-text-gold py-1 md:py-3 px-4">Contact</a></li>
+                </ul>
+            </div>            
+        </nav>
+        <div class="container mx-auto px-2 tm-intro-width">
+            <div class="sm:pb-60 sm:pt-48 py-20">
+                <div class="bg-black bg-opacity-70 p-12 mb-5 text-center">
+                    <h1 class="text-white text-5xl tm-logo-font mb-5">peach's patiesserie</h1>
+                    <p class="tm-text-gold tm-text-2xl">every item is made fresh with premium ingredient, pick your favourite treat!</p>
+                </div>    
+                <div class="bg-black bg-opacity-70 p-10 mb-5">
+                    <p class="text-white leading-8 text-sm font-light">
+                        This is a peach's patiesserie by kayyesa, a student of MAN 1 Yogyakarta. peach's patiesserie is a small artisan bakery born in the hearth of Yogyakarta. we believe every dessert should feel like a warm hug indulgent, beautiful, and made from scratch with the finest ingredients.
+                        If you're interested in our bakery, don't hesitate to <a rel="nofollow" href="https://wa.me/+6282138736970" target="_parent">send us a message</a> so you can take it store!
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="inline-block">
+                        <a href="#menu" class="flex justify-center items-center bg-black bg-opacity-70 py-6 px-8 rounded-lg font-semibold tm-text-2xl tm-text-gold hover:text-gray-200 transition">
+                            <span>Look at our patiesserie</span>                        
+                        </a>
+                    </div>                    
+                </div>                
+            </div>
+        </div>        
+    </div>
+
+    <!-- COOKIES & MACARON -->
+    <div id="menu" style="background: linear-gradient(135deg, #fff0f3, #ffe4e1, #ffd6cc);">
+        <div class="container mx-auto tm-container py-24 sm:py-48">
+            <div class="text-center mb-16">
+                <h2 class="bg-white tm-text-brown py-6 px-12 text-4xl font-medium inline-block rounded-md">our cookies n macaron</h2>
+            </div>            
+            <div class="flex flex-col lg:flex-row justify-around items-center">
+                <!-- LEFT -->
+                <div class="flex-1 m-5 rounded-xl px-4 py-6 sm:px-8 sm:py-10 tm-bg-brown tm-item-container">
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <img src="cookies1.jpg" class="menu-img" alt="classic cookies">
+                        <div class="ml-3 sm:ml-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">classic cookies</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">18k</div>
+                            <button class="btn-know-more" onclick="openModal('classic cookies','cookies1.jpg','18k','A timeless favorite made with premium butter and brown sugar, giving you that perfect crispy edge and chewy center. Packed with rich chocolate chips in every bite. Simple, comforting, and absolutely addictive.')">Get to know more</button>
+                        </div>                    
+                    </div>
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <img src="cookies2.jpg" class="menu-img" alt="red velvet cookies">
+                        <div class="ml-3 sm:ml-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">red velvet cookies</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">21k</div>
+                            <button class="btn-know-more" onclick="openModal('red velvet cookies','cookies2.jpg','21k','Soft and velvety red cookies with a hint of cocoa and a gorgeous deep red color. Filled with white and dark chocolate chips for a stunning contrast of flavors. Indulgent, eye-catching, and delicious.')">Get to know more</button>
+                        </div>                    
+                    </div>
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <img src="cookies3.jpg" class="menu-img" alt="matcha cookies">
+                        <div class="ml-3 sm:ml-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">matcha cookies</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">21k</div>
+                            <button class="btn-know-more" onclick="openModal('matcha cookies','cookies3.jpg','21k','Earthy premium matcha blended into a soft and chewy cookie base, topped with white chocolate chips and crunchy nuts. A perfect balance of bittersweet green tea flavor and sweetness in every bite.')">Get to know more</button>
+                        </div>                    
+                    </div>
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <img src="cookies4.jpg" class="menu-img" alt="nutella cookies">
+                        <div class="ml-3 sm:ml-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">nutella cookies</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">21k</div>
+                            <button class="btn-know-more" onclick="openModal('nutella cookies','cookies4.jpg','21k','Thick and fudgy cookies swirled with rich Nutella hazelnut spread throughout the dough. Perfectly gooey in the middle with a slightly crisp edge. A chocolate-hazelnut dream that melts in your mouth.')">Get to know more</button>
+                        </div>                    
+                    </div>
+                </div>
+                <!-- RIGHT -->
+                <div class="flex-1 m-5 rounded-xl px-4 py-6 sm:px-8 sm:py-10 tm-bg-brown tm-item-container">
+                    <div class="flex items-start justify-end mb-6 tm-menu-item-2">
+                        <div class="text-right mr-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">double choco cookies</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">21k</div>
+                            <button class="btn-know-more" onclick="openModal('double choco cookies','cookies5.jpg','21k','For the ultimate chocolate lover — a deep dark cocoa cookie base loaded with extra chocolate chips inside and out. Intensely rich, fudgy, and decadent. Double the chocolate, double the happiness.')">Get to know more</button>
+                        </div>
+                        <img src="cookies5.jpg" class="menu-img" alt="double choco cookies">
+                    </div>
+                    <div class="flex items-start justify-end mb-6 tm-menu-item-2">
+                        <div class="text-right mr-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">strawberry macaron</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">22k</div>
+                            <button class="btn-know-more" onclick="openModal('strawberry macaron','macaron1.jpg','22k','Delicate French macaron shells with a beautiful pink hue, filled with smooth strawberry buttercream. Light and airy on the outside, soft and creamy on the inside. Sweet, fruity, and utterly elegant.')">Get to know more</button>
+                        </div>
+                        <img src="macaron1.jpg" class="menu-img" alt="strawberry macaron">
+                    </div>
+                    <div class="flex items-start justify-end mb-6 tm-menu-item-2">
+                        <div class="text-right mr-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">vanilla macaron</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">22k</div>
+                            <button class="btn-know-more" onclick="openModal('vanilla macaron','macaron2.jpg','22k','Classic French macaron with crisp shells and a luscious vanilla bean buttercream filling. Subtle, refined, and perfectly sweet. A timeless flavor that never fails to impress with every delicate bite.')">Get to know more</button>
+                        </div>
+                        <img src="macaron2.jpg" class="menu-img" alt="vanilla macaron">
+                    </div>
+                    <div class="flex items-start justify-end mb-6 tm-menu-item-2">
+                        <div class="text-right mr-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">matcha macaron</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">22k</div>
+                            <button class="btn-know-more" onclick="openModal('matcha macaron','macaron3.jpg','22k','Premium Japanese matcha shells paired with a creamy matcha white chocolate ganache filling. Beautifully earthy and subtly sweet, with a gorgeous green color. Elegant, unique, and utterly irresistible.')">Get to know more</button>
+                        </div>
+                        <img src="macaron3.jpg" class="menu-img" alt="matcha macaron">
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <!-- CHEESECAKE & TIRAMISU -->
+    <div style="background: linear-gradient(135deg, #fff0f3, #ffe4e1, #ffd6cc);">
+        <div class="container mx-auto tm-container py-24 sm:py-48">
+            <div class="text-center mb-16">
+                <h2 class="bg-white tm-text-brown py-6 px-12 text-4xl font-medium inline-block rounded-md">our cheesecake n tiramisu</h2>
+            </div>            
+            <div class="flex flex-col lg:flex-row justify-around items-center">
+                <!-- LEFT -->
+                <div class="flex-1 m-5 rounded-xl px-4 py-6 sm:px-8 sm:py-10 tm-bg-brown tm-item-container">
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <img src="cheesecake1.jpg" class="menu-img" alt="vanilla cheesecake">
+                        <div class="ml-3 sm:ml-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">vanilla cheesecake</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">38k</div>
+                            <button class="btn-know-more" onclick="openModal('vanilla cheesecake','cheesecake1.jpg','38k','Silky smooth New York-style cheesecake on a buttery graham cracker crust. Infused with pure vanilla bean for a rich, aromatic flavor. Creamy, dense, and perfectly balanced — a dessert that never goes out of style.')">Get to know more</button>
+                        </div>                    
+                    </div>
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <img src="cheesecake2.jpg" class="menu-img" alt="oreo cheesecake">
+                        <div class="ml-3 sm:ml-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">oreo cheesecake</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">40k</div>
+                            <button class="btn-know-more" onclick="openModal('oreo cheesecake','cheesecake2.jpg','40k','Velvety cream cheese filling packed with crushed Oreo cookies, sitting on a thick Oreo cookie crust. Topped with more Oreos for extra crunch. Irresistibly rich and the ultimate treat for Oreo fans.')">Get to know more</button>
+                        </div>                    
+                    </div>
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <img src="cheesecake3.jpg" class="menu-img" alt="lotus biscoff cheesecake">
+                        <div class="ml-3 sm:ml-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">lotus biscoff cheesecake</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">43k</div>
+                            <button class="btn-know-more" onclick="openModal('lotus biscoff cheesecake','cheesecake3.jpg','43k','Luxurious cheesecake on a crunchy Lotus Biscoff crust, filled with a caramelized speculoos cream cheese layer, and finished with a generous drizzle of warm Biscoff spread. Sweet, spiced, and utterly indulgent.')">Get to know more</button>
+                        </div>                    
+                    </div>
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <img src="cheesecake4.jpg" class="menu-img" alt="blueberry cheesecake">
+                        <div class="ml-3 sm:ml-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">blueberry cheesecake</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">40k</div>
+                            <button class="btn-know-more" onclick="openModal('blueberry cheesecake','cheesecake4.jpg','40k','Creamy and tangy cheesecake topped with a vibrant homemade blueberry compote. The juicy, slightly tart blueberry topping perfectly balances the rich cream cheese filling. Fresh, fruity, and absolutely gorgeous.')">Get to know more</button>
+                        </div>                    
+                    </div>
+                </div>
+                <!-- RIGHT -->
+                <div class="flex-1 m-5 rounded-xl px-4 py-6 sm:px-8 sm:py-10 tm-bg-brown tm-item-container">
+                    <div class="flex items-start justify-end mb-6 tm-menu-item-2">
+                        <div class="text-right mr-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">classic tiramisu</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">35k</div>
+                            <button class="btn-know-more" onclick="openModal('classic tiramisu','tiramisu1.jpg','35k','The authentic Italian classic — layers of espresso-soaked ladyfinger biscuits alternated with silky mascarpone cream, dusted generously with premium cocoa powder. Rich, creamy, and deeply satisfying in every spoonful.')">Get to know more</button>
+                        </div>
+                        <img src="tiramisu1.jpg" class="menu-img" alt="classic tiramisu">
+                    </div>
+                    <div class="flex items-start justify-end mb-6 tm-menu-item-2">
+                        <div class="text-right mr-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">choco tiramisu</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">38k</div>
+                            <button class="btn-know-more" onclick="openModal('choco tiramisu','tiramisu2.jpg','38k','Our classic tiramisu taken to the next level with layers of dark chocolate ganache and rich cocoa-dusted mascarpone cream. Intensely chocolatey and indulgent — a dream dessert for chocolate lovers.')">Get to know more</button>
+                        </div>
+                        <img src="tiramisu2.jpg" class="menu-img" alt="choco tiramisu">
+                    </div>
+                    <div class="flex items-start justify-end mb-6 tm-menu-item-2">
+                        <div class="text-right mr-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">matcha tiramisu</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">40k</div>
+                            <button class="btn-know-more" onclick="openModal('matcha tiramisu','tiramisu3.jpg','40k','A Japanese-inspired twist on the Italian classic — ladyfingers soaked in premium matcha, layered with light mascarpone cream and dusted with vibrant green matcha powder. Earthy, creamy, and beautifully refreshing.')">Get to know more</button>
+                        </div>
+                        <img src="tiramisu3.jpg" class="menu-img" alt="matcha tiramisu">
+                    </div>
+                    <div class="flex items-start justify-end mb-6 tm-menu-item-2">
+                        <div class="text-right mr-6">
+                            <h3 class="text-xl sm:text-2xl mb-2 sm:mb-3 tm-text-yellow">lotus biscoff tiramisu</h3>
+                            <div class="text-white text-lg sm:text-xl font-light mb-1">42k</div>
+                            <button class="btn-know-more" onclick="openModal('lotus biscoff tiramisu','tiramisu4.jpg','42k','Our most indulgent tiramisu — Biscoff-soaked ladyfingers layered with velvety mascarpone cream, topped with crushed Lotus biscuits and a generous drizzle of caramelized Biscoff spread. Pure luxury in every bite.')">Get to know more</button>
+                        </div>
+                        <img src="tiramisu4.jpg" class="menu-img" alt="lotus biscoff tiramisu">
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <!-- ABOUT -->
+    <div id="about" style="background: linear-gradient(135deg, #fff0f3, #ffe4e1, #ffd6cc);">
+        <div class="container mx-auto tm-container py-24 sm:py-48">
+            <div class="tm-item-container sm:ml-auto sm:mr-12 mx-auto sm:px-0 px-4">
+                <div class="bg-white bg-opacity-80 p-12 pb-14 rounded-xl mb-5">
+                    <h2 class="mb-6 tm-text-green text-4xl font-medium">about our patiesserie</h2>
+                    <p class="mb-6 text-base leading-8">
+                        Welcome to our bakery! A cozy little place filled with sweet treats, fresh pastries, and warm moments to enjoy with your favorite people.
+                        Everything here is baked fresh every day with love and care, from soft breads and cookies to delicious cakes and drinks. We hope every visit brings you comfort, happiness, and something tasty to brighten your day.
+                        Thank you for stopping by and supporting our bakery. We're always happy to serve you!
+                    </p>
+                    <p class="text-base leading-8">
+                        If you wish to <a rel="nofollow" href="https://www.instagram.com/kayesaakha/" target="_parent">support us</a>, please make a reservation. That would be very helpful. Another way is to tell your friends about our patiesserie. Thank you.
+                    </p>
+                </div>
+                <a href="#contact" class="inline-block tm-bg-green transition text-white text-xl pt-3 pb-4 px-8 rounded-md">
+                    <i class="far fa-comments mr-4"></i>
+                    Contact
+                </a>
+            </div>           
+        </div>        
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="relative" style="background: linear-gradient(135deg, #fff0f3, #ffe4e1, #ffd6cc);"> 
+        <div class="container mx-auto tm-container pt-24 pb-48 sm:py-48">
+            <div class="flex flex-col lg:flex-row justify-around items-center lg:items-stretch">
+                <div class="flex-1 rounded-xl px-10 py-12 m-5 bg-white bg-opacity-80 tm-item-container">
+                    <h2 class="text-3xl mb-6 tm-text-green">Contact Us</h2>
+                    <p class="mb-6 text-lg leading-8">Jl. C. Simanjuntak 60 Yogyakarta</p>
+                    <p class="mb-10 text-lg">
+                        <span class="block mb-2">Tel: <a href="tel:082138736970" class="hover:text-yellow-600 transition">082138736970</a></span>
+                        <span class="block">Email: <a href="mailto:mariooshortcake@gmail.com" class="hover:text-yellow-600 transition">mariooshortcake@gmail.com</a></span>                        
+                    </p>
+                    <div class="text-center">
+                        <a href="https://goo.gl/maps/dXViG2rdqh7XozfL6" class="inline-block text-white text-2xl pl-10 pr-12 py-6 rounded-lg transition tm-bg-green">
+                            <i class="fas fa-map-marked-alt mr-8"></i>
+                            Open Maps
+                        </a>
+                    </div>                    
+                </div>
+                <div class="flex-1 rounded-xl p-12 pb-14 m-5 bg-black bg-opacity-50 tm-item-container">
+                    <form action="" method="POST" class="text-lg">
+                        <input type="text" name="name" class="input w-full bg-black border-b bg-opacity-0 text-white px-0 py-4 mb-4 tm-border-gold" placeholder="Name" required="" />
+                        <input type="email" name="email" class="input w-full bg-black border-b bg-opacity-0 text-white px-0 py-4 mb-4 tm-border-gold" placeholder="Email" required="" />
+                        <textarea rows="6" name="message" class="input w-full bg-black border-b bg-opacity-0 text-white px-0 py-4 mb-4 tm-border-gold" placeholder="Message..." required=""></textarea>
+                        <div class="text-right">
+                            <button type="submit" class="text-white hover:text-yellow-500 transition">Send it</button>
+                        </div>                        
+                    </form>
+                </div>
+            </div>
+            <footer class="absolute bottom-0 left-0 w-full">
+                <div class="text-white container mx-auto tm-container p-8 text-lg flex flex-col md:flex-row justify-between">
+                    <span>Copyright 2026 patiesserie.</span>
+                    <span class="mt-5 md:mt-0">Design: <a href="https://www.instagram.com/kayesaakha/" target="_parent">kayesaakha</a></span>
+                </div>                
+            </footer>
+        </div>        
+    </div>
+
+    <!-- MODAL POPUP -->
+    <div class="cat-modal-overlay" id="catModal">
+        <div class="cat-modal-box">
+            <button class="cat-modal-close" onclick="closeModal()">&#10005;</button>
+            <img id="modalImg" src="" class="cat-modal-img" alt="">
+            <div class="cat-modal-info">
+                <h3 id="modalName"></h3>
+                <p class="cat-detail" id="modalPrice"></p>
+                <div class="cat-bio" id="modalBio"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/parallax.min.js"></script>
+    <script src="js/jquery.singlePageNav.min.js"></script>
+    <script>
+        function openModal(name, img, price, bio) {
+            document.getElementById('modalName').textContent = name;
+            document.getElementById('modalImg').src = img;
+            document.getElementById('modalImg').alt = name;
+            document.getElementById('modalPrice').textContent = 'Price : Rp ' + price;
+            document.getElementById('modalBio').textContent = bio;
+            document.getElementById('catModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('catModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('catModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        function checkAndShowHideMenu() {
+            if(window.innerWidth < 768) {
+                $('#tm-nav ul').addClass('hidden');                
+            } else {
+                $('#tm-nav ul').removeClass('hidden');
+            }
+        }
+        $(function(){
+            var tmNav = $('#tm-nav');
+            tmNav.singlePageNav();
+            checkAndShowHideMenu();
+            window.addEventListener('resize', checkAndShowHideMenu);
+            $('#menu-toggle').click(function(){
+                $('#tm-nav ul').toggleClass('hidden');
+            });
+            $('#tm-nav ul li').click(function(){
+                if(window.innerWidth < 768) {
+                    $('#tm-nav ul').addClass('hidden');
+                }                
+            });
+            $(document).scroll(function() {
+                var distanceFromTop = $(document).scrollTop();
+                if(distanceFromTop > 100) {
+                    tmNav.addClass('scroll');
+                } else {
+                    tmNav.removeClass('scroll');
+                }
+            });
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
